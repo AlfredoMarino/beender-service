@@ -7,3 +7,7 @@ class Match(BaseModel):
     bee_id: int = Field(..., alias="beeId")
     hive_accept: bool = Field(..., alias="hiveAccept")
     bee_accept: bool = Field(..., alias="beeAccept")
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True

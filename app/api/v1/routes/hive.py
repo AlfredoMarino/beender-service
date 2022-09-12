@@ -13,3 +13,11 @@ router = APIRouter()
 )
 def get_hives() -> List[Hive]:
     return hive_service.get_hives()
+
+
+@router.get(
+    path="/{hive_id}",
+    response_model=Hive
+)
+def get_hives(hive_id: int) -> Hive:
+    return hive_service.get_hive(hive_id)
