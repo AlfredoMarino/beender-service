@@ -7,3 +7,7 @@ class Hive(BaseModel):
     description: str = Field(...)
     queen_bee: str = Field(..., alias="queenBee")
     picture: str = Field(...)
+
+    class Config:
+        orm_mode = True
+        allow_population_by_field_name = True

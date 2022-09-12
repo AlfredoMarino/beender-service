@@ -1,2 +1,5 @@
 fastapi[all]==0.82.0
 uvicorn[standard]==0.17.6
+
+peewee
+psycopg2

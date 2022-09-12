@@ -2,6 +2,7 @@ from enum import Enum
 from typing import Optional
 from pydantic import BaseModel, Field
 
+
 class Interest(Enum):
     PYTHON_DEVELOPER = "PYTHON_DEVELOPER"
     DATA_SCIENTIST = "DATA_SCIENTIST"
