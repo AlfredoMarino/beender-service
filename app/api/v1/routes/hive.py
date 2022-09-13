@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status, Path
 
 from app.schemas.hive import Hive
 from app.services import hive_service
@@ -19,5 +19,11 @@ def get_hives() -> List[Hive]:
     path="/{hive_id}",
     response_model=Hive
 )
-def get_hives(hive_id: int) -> Hive:
-    return hive_service.get_hive(hive_id)
+def get_hive(
+        hive_id: int = Path(..., example=1, gt=0, description="Hive identifier")
+) -> Hive:
+    try:
+        return hive_service.get_hive(hive_id)
+
+    except Exception:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Hive not found")
