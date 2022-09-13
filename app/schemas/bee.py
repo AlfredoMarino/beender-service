@@ -9,7 +9,17 @@ class Interest(Enum):
     DEV_OPS = "DEV_OPS"
 
 
-class Bee(BaseModel):
+class BaseBee(BaseModel):
+    id: Optional[int]
+    firstname: Optional[str]
+    lastname: Optional[str]
+    interested_in: Optional[Interest]
+    experience_years: Optional[int]
+    bio: Optional[str]
+    picture: Optional[str]
+
+
+class Bee(BaseBee):
     id: int = Field(...)
     firstname: str = Field(...)
     lastname: str = Field(...)
@@ -17,4 +27,3 @@ class Bee(BaseModel):
     experience_years: int = Field(..., alias="experienceYears")
     bio: Optional[str] = Field("")
     picture: str = Field(...)
-    
