@@ -16,4 +16,4 @@ MATCH_EXAMPLE = MatchBase(hive_id=1, bee_id=1, bee_accept=True, hive_accept=None
 def create_match(
         match: MatchBase = Body(example=MATCH_EXAMPLE)
 ) -> Match:
-    return match_service.create_match(match)
+    return match_service.create_or_update_match(match)

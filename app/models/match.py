@@ -7,5 +7,5 @@ from app.models.hive import Hive
 class Match(BaseModel):
     hive_id = ForeignKeyField(Hive, backref="match")
     bee_id = IntegerField()
-    beeAccept = BooleanField()
-    hiveAccept = BooleanField()
+    bee_accept = BooleanField()
+    hive_accept = BooleanField()
