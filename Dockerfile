@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir --upgrade -r /beender-service/requirements.txt
 
 COPY ./app /beender-service/app
 
-EXPOSE 5000
+EXPOSE 6060
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "5000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "6060"]
