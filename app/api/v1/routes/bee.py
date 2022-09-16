@@ -3,6 +3,7 @@ from typing import List
 from fastapi import APIRouter
 
 from app.schemas.bee import Bee, BaseBee
+from app.services import bee_service
 
 router = APIRouter()
 
@@ -12,7 +13,7 @@ router = APIRouter()
     response_model=List[Bee]
 )
 def get_bees() -> List[Bee]:
-    pass
+    return bee_service.get_bees()
 
 
 @router.post(

@@ -27,3 +27,7 @@ class Bee(BaseBee):
     experience_years: int = Field(..., alias="experienceYears")
     bio: Optional[str] = Field("")
     picture: str = Field(...)
+
+    class Config:
+        allow_population_by_field_name = True
+
