@@ -16,6 +16,14 @@ def get_bees() -> List[Bee]:
     return bee_service.get_bees()
 
 
+@router.get(
+    path="/{bee_id}",
+    response_model=Bee
+)
+def get_bee(bee_id) -> Bee:
+    return bee_service.get_bee(bee_id)
+
+
 @router.post(
     path="",
     response_model=Bee

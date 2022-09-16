@@ -13,7 +13,7 @@ def get_bees() -> List[Bee]:
 
     result = []
     for bee in bees:
-        new_bee = Bee(
+        bee_saved = Bee(
             id=bee.id,
             firstname=bee.firstname,
             lastname=bee.lastname,
@@ -22,7 +22,23 @@ def get_bees() -> List[Bee]:
             bio=bee.bio,
             picture=bee.picture
         )
-        result.append(new_bee)
+        result.append(bee_saved)
 
     return result
+    # return [Bee.from_orm(bee) for bee in list(BeeModel.select().namedtuples())]
 
+
+def get_bee(bee_id) -> Bee:
+    # bee = BeeModel.get_by_id(bee_id)
+    # bee_saved = Bee(
+    #     id=bee.id,
+    #     firstname=bee.firstname,
+    #     lastname=bee.lastname,
+    #     interested_in=bee.interested_in,
+    #     experience_years=bee.experience_years,
+    #     bio=bee.bio,
+    #     picture=bee.picture
+    # )
+
+    # return bee_saved
+    return Bee.from_orm(BeeModel.get_by_id(bee_id))
