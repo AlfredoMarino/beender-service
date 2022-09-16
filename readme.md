@@ -9,13 +9,13 @@ docker build -t beender-service:latest .
 
 Run docker container
 ```
-docker run --name beender-service -it -p 5000:5000 beender-service
+docker run --name beender-service -it -p 6060:6060 beender-service
 ```
 
 Run docker compose
     
 SERVICE             PORT
-- beender-service:    5000
+- beender-service:    6060
 - postgresql:         5432
 - pgadmin:            5050
 ````

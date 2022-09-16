@@ -9,7 +9,7 @@ services:
     volumes:
       - ./app:/beender-service/app
     ports:
-      - "5000:5000"
+      - "6060:6060"
     networks:
       - postgres
     

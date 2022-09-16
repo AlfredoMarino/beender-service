@@ -6,7 +6,7 @@ CREATE TABLE bee (
 	experience_years INT,
 	picture VARCHAR,
 	bio VARCHAR
-)
+);
 
 CREATE TABLE hive (
 	id SERIAL PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE hive (
 	description VARCHAR,
 	queen_bee VARCHAR,
 	picture VARCHAR
-)
+);
 
 CREATE TABLE match (
     id serial PRIMARY KEY,
@@ -26,4 +26,4 @@ CREATE TABLE match (
         REFERENCES public.bee (id),
     CONSTRAINT hive_id FOREIGN KEY (hive_id)
         REFERENCES public.hive (id)
-)
+);
