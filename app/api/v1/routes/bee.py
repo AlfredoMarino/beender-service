@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from app.schemas.bee import Bee, BaseBee
+from app.schemas.bee import Bee, BeeBase
 from app.services import bee_service
 
 router = APIRouter()
@@ -28,15 +28,15 @@ def get_bee(bee_id) -> Bee:
     path="",
     response_model=Bee
 )
-def create_bee(bee: Bee) -> Bee:
-    pass
+def create_bee(bee: BeeBase) -> Bee:
+    return bee_service.create_bee(bee)
 
 
 @router.patch(
     path="/{bee_id}",
     response_model=Bee
 )
-def update_bee(bee_id: int, bee: BaseBee) -> Bee:
+def update_bee(bee_id: int, bee: BeeBase) -> Bee:
     pass
 
 

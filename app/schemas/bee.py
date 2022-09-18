@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 
 
 class Interest(Enum):
@@ -9,26 +9,24 @@ class Interest(Enum):
     DEV_OPS = "DEV_OPS"
 
 
-class BaseBee(BaseModel):
-    id: Optional[int]
-    firstname: Optional[str]
-    lastname: Optional[str]
-    interested_in: Optional[Interest]
-    experience_years: Optional[int]
-    bio: Optional[str]
-    picture: Optional[str]
-
-
-class Bee(BaseBee):
-    id: int = Field(...)
+class BeeBase(BaseModel):
     firstname: str = Field(...)
     lastname: str = Field(...)
     interested_in: Interest = Field(..., alias="interestedIn")
-    experience_years: int = Field(..., alias="experienceYears")
+    # experience_years: int = Field(..., alias="experienceYears")
+    experience_years: int = Field(..., alias="experienceYears", ge=0)
     bio: Optional[str] = Field("")
     picture: str = Field(...)
+
+    # @validator("picture", pre=True, always=True)
+    # def check_picture(cls, picture):
+    #     assert len(picture.strip()) > 0, "Picture cannot be empty."
+    #     return picture
 
     class Config:
         allow_population_by_field_name = True
         orm_mode = True
 
+
+class Bee(BeeBase):
+    id: int = Field(...)
