@@ -30,3 +30,12 @@ class BeeBase(BaseModel):
 
 class Bee(BeeBase):
     id: int = Field(...)
+
+
+class BeeOptional(BaseModel):
+    firstname: Optional[str] = Field(default=None)
+    lastname: Optional[str] = Field(default=None)
+    interested_in: Optional[Interest] = Field(default=None, alias="interestedIn")
+    experience_years: Optional[int] = Field(default=None, alias="experienceYears")
+    bio: Optional[str] = Field(default=None)
+    picture: Optional[str] = Field(default=None)

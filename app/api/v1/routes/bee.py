@@ -2,7 +2,7 @@ from typing import List
 
 from fastapi import APIRouter, Path, Body
 
-from app.schemas.bee import Bee, BeeBase
+from app.schemas.bee import Bee, BeeBase, BeeOptional
 from app.services import bee_service
 
 router = APIRouter()
@@ -20,7 +20,7 @@ def get_bees() -> List[Bee]:
     path="/{bee_id}",
     response_model=Bee
 )
-def get_bee(bee_id: int = Path(..., example=1, gt=0, description="bee identifier")) -> Bee:
+def get_bee(bee_id: int = Path(..., example=1, gt=0, description="Bee identifier")) -> Bee:
     return bee_service.get_bee(bee_id)
 
 
@@ -37,10 +37,21 @@ def create_bee(bee: BeeBase) -> Bee:
     response_model=Bee
 )
 def update_bee(
-        bee_id: int = Path(..., example=1, gt=0, description="bee identifier"),
+        bee_id: int = Path(..., example=1, gt=0, description="Bee identifier"),
         bee: BeeBase = Body(..., description="Entire bee to update")
 ) -> Bee:
     return bee_service.update_bee(bee_id, bee)
+
+
+@router.patch(
+    path="/{bee_id}",
+    response_model=Bee
+)
+def partial_update_bee(
+        bee_id: int = Path(..., example=1, gt=0, description="Bee identifier"),
+        bee: BeeOptional = Body(..., description="Bee to update")
+) -> Bee:
+    return bee_service.update_bee(bee_id, bee, True)
 
 
 @router.delete(

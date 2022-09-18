@@ -62,8 +62,8 @@ def create_bee(bee: BeeBase) -> Bee:
     return Bee.from_orm(new_bee)
 
 
-def update_bee(bee_id: int, bee_to_update: BeeBase) -> Bee:
-    BeeModel.update(**bee_to_update.dict())\
+def update_bee(bee_id: int, bee_to_update: BeeBase, is_partial_update: bool = False) -> Bee:
+    BeeModel.update(**bee_to_update.dict(exclude_unset=is_partial_update))\
         .where(BeeModel.id == bee_id)\
         .execute()
 
