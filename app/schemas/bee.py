@@ -13,7 +13,6 @@ class BeeBase(BaseModel):
     firstname: str = Field(...)
     lastname: str = Field(...)
     interested_in: Interest = Field(..., alias="interestedIn")
-    # experience_years: int = Field(..., alias="experienceYears")
     experience_years: int = Field(..., alias="experienceYears", ge=0)
     bio: Optional[str] = Field("")
     picture: str = Field(...)
@@ -26,6 +25,16 @@ class BeeBase(BaseModel):
     class Config:
         allow_population_by_field_name = True
         orm_mode = True
+        schema_extra = {
+            "example": {
+                "firstname": "Freddie",
+                "lastname": "Mercury",
+                "interestedIn": "PYTHON_DEVELOPER",
+                "experienceYears": 15,
+                "bio": "Programador python",
+                "picture": "photo.jpg"
+            }
+        }
 
 
 class Bee(BeeBase):
