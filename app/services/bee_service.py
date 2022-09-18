@@ -1,5 +1,6 @@
 from typing import List
 
+import peewee
 from fastapi import HTTPException, status
 
 from app.schemas.bee import Bee, BeeBase
@@ -63,8 +64,17 @@ def create_bee(bee: BeeBase) -> Bee:
 
 
 def update_bee(bee_id: int, bee_to_update: BeeBase, is_partial_update: bool = False) -> Bee:
-    BeeModel.update(**bee_to_update.dict(exclude_unset=is_partial_update))\
-        .where(BeeModel.id == bee_id)\
-        .execute()
+    try:
+        (
+            BeeModel.update(**bee_to_update.dict(exclude_unset=is_partial_update))
+            .where(BeeModel.id == bee_id)
+            .execute()
+        )
 
-    return get_bee(bee_id)
+        return get_bee(bee_id)
+    except peewee.DoesNotExist:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Bee not found")
+
+
+def delete_bee(bee_id: int) -> None:
+    BeeModel.delete_by_id(bee_id)

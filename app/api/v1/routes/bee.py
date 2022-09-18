@@ -56,7 +56,8 @@ def partial_update_bee(
 
 @router.delete(
     path="/{bee_id}",
-    response_model=None
+    response_model=None,
+    status_code=204
 )
-def delete_bee(bee_id: int) -> None:
-    pass
+def delete_bee(bee_id: int = Path(..., example=1, gt=0, description="Bee identifier")) -> None:
+    bee_service.delete_bee(bee_id)
