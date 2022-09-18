@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Path, Body
 
 from app.schemas.bee import Bee, BeeBase
 from app.services import bee_service
@@ -20,7 +20,7 @@ def get_bees() -> List[Bee]:
     path="/{bee_id}",
     response_model=Bee
 )
-def get_bee(bee_id) -> Bee:
+def get_bee(bee_id: int = Path(..., example=1, gt=0, description="bee identifier")) -> Bee:
     return bee_service.get_bee(bee_id)
 
 
@@ -32,12 +32,15 @@ def create_bee(bee: BeeBase) -> Bee:
     return bee_service.create_bee(bee)
 
 
-@router.patch(
+@router.put(
     path="/{bee_id}",
     response_model=Bee
 )
-def update_bee(bee_id: int, bee: BeeBase) -> Bee:
-    pass
+def update_bee(
+        bee_id: int = Path(..., example=1, gt=0, description="bee identifier"),
+        bee: BeeBase = Body(..., description="Entire bee to update")
+) -> Bee:
+    return bee_service.update_bee(bee_id, bee)
 
 
 @router.delete(

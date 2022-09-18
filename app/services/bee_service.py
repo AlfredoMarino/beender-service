@@ -41,7 +41,7 @@ def get_bee(bee_id: int) -> Bee:
         bio=bee.bio,
         picture=bee.picture
     )
-    #
+
     return bee_saved
     # return Bee.from_orm(BeeModel.get_by_id(bee_id))
 
@@ -53,10 +53,18 @@ def create_bee(bee: BeeBase) -> Bee:
     new_bee = BeeModel.create(
         firstname=bee.firstname,
         lastname=bee.lastname,
-        interested_in=bee.interested_in.name,
+        interested_in=bee.interested_in,
         experience_years=bee.experience_years,
         picture=bee.picture,
         bio=bee.bio
     )
 
     return Bee.from_orm(new_bee)
+
+
+def update_bee(bee_id: int, bee_to_update: BeeBase) -> Bee:
+    BeeModel.update(**bee_to_update.dict())\
+        .where(BeeModel.id == bee_id)\
+        .execute()
+
+    return get_bee(bee_id)

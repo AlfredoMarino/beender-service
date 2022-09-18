@@ -3,7 +3,7 @@ from typing import Optional
 from pydantic import BaseModel, Field, validator
 
 
-class Interest(Enum):
+class Interest(str, Enum):
     PYTHON_DEVELOPER = "PYTHON_DEVELOPER"
     DATA_SCIENTIST = "DATA_SCIENTIST"
     DEV_OPS = "DEV_OPS"
